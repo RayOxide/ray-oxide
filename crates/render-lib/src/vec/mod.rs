@@ -1,0 +1,1 @@
+pub type Vec3 = [f32; 3];
