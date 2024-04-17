@@ -1,2 +1,2 @@
 [workspace]
-members = [ "crates/app", "crates/cli", "crates/render-lib","crates/scene-lib"]
+members = [ "crates/app", "crates/cli", "crates/common-lib"]
