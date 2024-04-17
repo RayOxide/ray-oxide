@@ -6,6 +6,9 @@ pub trait Vector {
     fn x(&self) -> f32;
     fn y(&self) -> f32;
     fn z(&self) -> f32;
+
+    fn length(&self) -> f32;
+    fn unit(&self) -> Self;
 }
 
 impl Vector for Vec3 {
@@ -19,6 +22,15 @@ impl Vector for Vec3 {
 
     fn z(&self) -> f32 {
         self[2]
+    }
+
+    fn length(&self) -> f32 {
+        f32::sqrt(self[0] * self[0] + self[1] * self[1] + self[2] * self[2])
+    }
+
+    fn unit(&self) -> Self {
+        let length = self.length();
+        self.map(|element| element / length)
     }
 }
 
@@ -35,6 +47,7 @@ impl MatrixMul<Vec3> for Matrix3x3 {
 }
 
 mod tests {
+
     #[test]
     fn matrix_vec_mul() {
         use crate::matrix::{Matrix3x3, MatrixMul, Unit};
@@ -44,5 +57,18 @@ mod tests {
         let b: Vec3 = [1.0, 2.0, 3.0];
 
         assert_eq!(b, a.mul(&b))
+    }
+
+    #[test]
+    fn length() {
+        use crate::vec::Vector;
+
+        assert_eq!(14.0f32.sqrt(), [1.0, 2.0, 3.0].length())
+    }
+
+    #[test]
+    fn unit() {
+        use crate::vec::Vector;
+        assert!(1.0 - [1283.0, 63231.1, 84351.9].unit().length() < 0.00001)
     }
 }
