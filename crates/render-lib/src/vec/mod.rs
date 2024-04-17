@@ -9,6 +9,12 @@ pub trait Vector {
 
     fn length(&self) -> f32;
     fn unit(&self) -> Self;
+    fn add_vec(&self, rhs: &Self) -> Self;
+    fn add(&self, rhs: f32) -> Self;
+    fn sub_vec(&self, rhs: &Self) -> Self;
+    fn sub(&self, rhs: f32) -> Self;
+    fn mul(&self, rhs: f32) -> Self;
+    fn div(&self, rhs: f32) -> Self;
 }
 
 impl Vector for Vec3 {
@@ -31,6 +37,30 @@ impl Vector for Vec3 {
     fn unit(&self) -> Self {
         let length = self.length();
         self.map(|element| element / length)
+    }
+
+    fn add_vec(&self, rhs: &Self) -> Self {
+        [self[0] + rhs[0], self[1] + rhs[1], self[2] + rhs[2]]
+    }
+
+    fn add(&self, rhs: f32) -> Self {
+        self.map(|element| element + rhs)
+    }
+
+    fn sub_vec(&self, rhs: &Self) -> Self {
+        [self[0] - rhs[0], self[1] - rhs[1], self[2] - rhs[2]]
+    }
+
+    fn sub(&self, rhs: f32) -> Self {
+        self.map(|element| element - rhs)
+    }
+
+    fn mul(&self, rhs: f32) -> Self {
+        self.map(|element| element * rhs)
+    }
+
+    fn div(&self, rhs: f32) -> Self {
+        self.map(|element| element - rhs)
     }
 }
 
