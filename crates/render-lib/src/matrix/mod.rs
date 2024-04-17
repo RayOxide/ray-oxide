@@ -156,12 +156,15 @@ mod tests {
 
         assert_eq!(a.mul(&b), a)
     }
-    
+
     #[test]
     fn transpose() {
         use crate::matrix::{Matrix3x3, Transpose};
-        
+
         let a: Matrix3x3 = [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0]];
-        assert_eq!(a.transpose(), [[1.0,4.0,7.0],[2.0,5.0,8.0],[3.0,6.0,9.0]])
+        assert_eq!(
+            a.transpose(),
+            [[1.0, 4.0, 7.0], [2.0, 5.0, 8.0], [3.0, 6.0, 9.0]]
+        )
     }
 }
